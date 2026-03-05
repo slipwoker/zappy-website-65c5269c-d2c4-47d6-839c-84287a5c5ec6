@@ -1,0 +1,47 @@
+# Business — Generative Engine Optimization Map
+
+---
+
+## Pages
+
+### בית
+https://example.com
+בוטיק פרימיום לתכנון פרישה חכם המשלב אופטימיזציה מיסויית אסטרטגית עם ייצוג מלא מול רשויות המס. פתרון דיגיטלי מתקדם לפרישה נכונה מהפעם הראשונה.
+
+### שירותים
+https://example.com/services
+פרישה רגילה, פרישה רפואית, מעבר קריירה או קיבוע זכויות עובד מעל גיל פרישה. כל מסלול מותאם אישית עם ליווי מקצועי מלא וייצוג משפטי מול המס.
+
+### תהליך
+https://example.com/process
+מערכת קליטה אוטומטית מתקדמת עם העלאת מסמכים, חתימות דיגיטליות ואינטגרציה מלאה. תהליך יעיל שמחליף תקשורת מייגעת בפתרון מקצועי ומסודר.
+
+### צור קשר
+https://example.com/contact
+קבע פגישת ייעוץ ראשונית עם מומחי המיסוי והפרישה שלנו. ייצוג מקצועי מלא מול רשויות המס והבטחת כל הזכויות המגיעות לך. בוא נתחיל בתהליך.
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+# Business Context (for LLM understanding)
+
+## About Business
+---
+
+# Additional Resources
+
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt

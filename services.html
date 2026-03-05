@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>ארבעה מסלולים מיוחדים לפרישה מיטבית — פשוט לפרוש</title>
+    <meta name="description" content="פרישה רגילה, פרישה רפואית, מעבר קריירה או קיבוע זכויות עובד מעל גיל פרישה. כל מסלול מותאם אישית עם ליווי מקצועי מלא וייצוג משפטי מול המס.">
+    <meta name="keywords" content="תכנון פרישה רפואית ומיסוי, קיבוע זכויות עובד מעל גיל פרישה, מעבר קריירה ומיסוי, פרישה מוקדמת רפואית, שירותי פרישה מקצועיים">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '65c5269c-d2c4-47d6-839c-84287a5c5ec6',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="ארבעה מסלולים מיוחדים לפרישה מיטבית — פשוט לפרוש">
+  <meta property="og:description" content="פרישה רגילה, פרישה רפואית, מעבר קריירה או קיבוע זכויות עובד מעל גיל פרישה. כל מסלול מותאם אישית עם ליווי מקצועי מלא וייצוג משפטי מול המס.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ארבעה מסלולים מיוחדים לפרישה מיטבית — פשוט לפרוש">
+  <meta name="twitter:description" content="פרישה רגילה, פרישה רפואית, מעבר קריירה או קיבוע זכויות עובד מעל גיל פרישה. כל מסלול מותאם אישית עם ליווי מקצועי מלא וייצוג משפטי מול המס.">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-dark) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-dark) !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-dark) !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      #mic-access-tool-general-button, .mic-access-tool-general-button,
+      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewbox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewbox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/logo.webp" alt="פשוט לפרוש" class="logo">
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu"><li><a href="/services">שירותים</a></li><li><a href="/process">תהליך</a></li></ul>
+    
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="services-intro-section" data-layout-spec="שירותים-intro">
+  <div class="services-intro-container">
+    <div class="services-intro-header">
+      <h1>מסלולים מותאמים להחלטות פרישה</h1>
+      <p class="services-intro-subtitle">בחרו במסלול שמתאים למציאות שלכם—סטנדרטי, רפואי, החלפת קריירה או קיבוע זכויות.</p>
+    </div>
+
+    <div class="services-intro-card">
+      <div class="services-intro-columns">
+        <div class="services-intro-column">
+          <h3>למי זה מתאים</h3>
+          <ul class="services-intro-list">
+            <li>
+              <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+                <path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>מתכננים פרישה בטווח של 6–24 החודשים הקרובים</span>
+            </li>
+            <li>
+              <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+                <path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>פורשים מסיבות רפואיות או נסיבות מיוחדות</span>
+            </li>
+            <li>
+              <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+                <path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>מחליפים קריירה או מפסיקים תעסוקה מוקדם</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="services-intro-column">
+          <h3>מה אתם מקבלים</h3>
+          <ul class="services-intro-list">
+            <li>
+              <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2L12.5 7.5L18 8.5L14 12.5L15 18L10 15.5L5 18L6 12.5L2 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>תכנון מודע מס ותיעוד מסודר</span>
+            </li>
+            <li>
+              <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2L12.5 7.5L18 8.5L14 12.5L15 18L10 15.5L5 18L6 12.5L2 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>הגשות ברורות ותוצאות מסוכמות</span>
+            </li>
+            <li>
+              <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2L12.5 7.5L18 8.5L14 12.5L15 18L10 15.5L5 18L6 12.5L2 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>ייצוג מול רשויות המס ותקשורת מובנית</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="services-intro-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 40" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 L0,20 Q100,18 200,20 T400,20 Q500,18 600,20 T800,20 Q900,18 1000,20 T1200,20 L1200,40 Z" fill="#F6F1EC" stroke="#A8A19A" stroke-width="1.5" stroke-dasharray="6,4" stroke-linecap="round"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="services-service-cards-section" data-layout-spec="שירותים-service-cards">
+  <div class="services-service-cards-container">
+    <div class="services-service-cards-header">
+      <h2>מסלולי השירות שלנו</h2>
+      <p>ארבעה מסלולים ייעודיים המותאמים לצרכים השונים של פורשים ומחליפי קריירה</p>
+    </div>
+    <div class="services-service-cards-grid">
+      <!-- Card 1: Standard Retirement -->
+      <article class="services-service-card">
+        <div class="services-service-card-header">
+          <h3>תכנון פרישה סטנדרטי</h3>
+          <p>מסלול מקיף לעובדים המגיעים לגיל פרישה ומעוניינים במעבר חלק ומתוכנן</p>
+        </div>
+        <div class="services-service-card-inclusions">
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>מיפוי מקיף של זכויות והכנסות צפויות</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>תכנון אירועי מס ואופטימיזציה פיננסית</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>ליווי והכנת מסמכים נדרשים</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>מבנה תיק מאורגן ומוכן להגשה</p>
+          </div>
+        </div>
+        <div class="services-service-card-outcomes">
+          <div class="services-service-outcomes-label">תוצאות טיפוסיות:</div>
+          <p>פחות הפתעות בשלב הביצוע</p>
+          <p>תיעוד ברור לכל החלטה פיננסית</p>
+        </div>
+      </article>
+
+      <!-- Card 2: Medical Retirement -->
+      <article class="services-service-card">
+        <div class="services-service-card-header">
+          <h3>פרישה רפואית</h3>
+          <p>ליווי רגיש ומקצועי לעובדים הפורשים מסיבות רפואיות</p>
+        </div>
+        <div class="services-service-card-inclusions">
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>הערכת זכויות ייחודיות לפרישה רפואית</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>תכנון מיסוי התואם למצב הרפואי</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>ארגון מסמכים רפואיים ופיננסיים</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>תיק מסודר להגשה לגורמים הרלוונטיים</p>
+          </div>
+        </div>
+        <div class="services-service-card-outcomes">
+          <div class="services-service-outcomes-label">תוצאות טיפוסיות:</div>
+          <p>תהליך מהיר יותר עם תיעוד מסודר</p>
+          <p>בהירות מלאה לגבי זכויות והטבות</p>
+        </div>
+      </article>
+
+      <!-- Card 3: Career Change -->
+      <article class="services-service-card">
+        <div class="services-service-card-header">
+          <h3>החלפת קריירה / יציאה מוקדמת</h3>
+          <p>תכנון אסטרטגי לעובדים המעוניינים במעבר קריירה או פרישה מוקדמת</p>
+        </div>
+        <div class="services-service-card-inclusions">
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>ניתוח זכויות והכנסות במעבר קריירה</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>אופטימיזציה מיסויית ליציאה מוקדמת</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>הכנה וסידור מסמכי מעבר</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>תיק מוכן להגשה עם כל הפרטים</p>
+          </div>
+        </div>
+        <div class="services-service-card-outcomes">
+          <div class="services-service-outcomes-label">תוצאות טיפוסיות:</div>
+          <p>מעבר בטוח עם מינימום סיכונים</p>
+          <p>החלטות מבוססות על נתונים מדויקים</p>
+        </div>
+      </article>
+
+      <!-- Card 4: Rights Consolidation -->
+      <article class="services-service-card">
+        <div class="services-service-card-header">
+          <h3>קיבוע זכויות</h3>
+          <p>מיצוי זכויות מלא לעובדים מעל גיל פרישה הממשיכים לעבוד</p>
+        </div>
+        <div class="services-service-card-inclusions">
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>מיפוי זכויות מצטברות לאורך השנים</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>תכנון מס מותאם לעבודה מעבר לגיל פרישה</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>ארגון תיעוד לקיבוע זכויות</p>
+          </div>
+          <div class="services-service-inclusion">
+            <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+              <path d="M6 10.5L8.5 13L14 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <p>תיק מסודר להגשה לרשויות</p>
+          </div>
+        </div>
+        <div class="services-service-card-outcomes">
+          <div class="services-service-outcomes-label">תוצאות טיפוסיות:</div>
+          <p>מימוש מלא של זכויות ללא אובדן</p>
+          <p>בהירות מלאה לגבי מצב פנסיוני</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="services-service-cards-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 60" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,25 Q100,20 200,28 T400,22 Q500,28 600,20 T800,26 Q900,18 1000,24 T1200,22 L1200,60 Z" fill="var(--bg-dark)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="services-comparison-section" data-layout-spec="שירותים-comparison">
+  <div class="services-comparison-container">
+    <div class="services-comparison-header">
+      <h2>תהליך עבודה שתוכנן למען בהירות ואחריות</h2>
+      <p>אותו רמת מקצועיות שמצפים מחברות מבוססות — מועברת בחוויה דיגיטלית מודרנית ומסודרת.</p>
+    </div>
+
+    <div class="services-comparison-grid">
+      <!-- Column 1: Traditional back-and-forth -->
+      <div class="services-comparison-card">
+        <div class="services-comparison-card-header">
+          <h3>תקשורת מסורתית הלוך-חזור</h3>
+        </div>
+        <div class="services-comparison-rows">
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">בהירות תקשורת</div>
+            <div class="services-comparison-row-value">שיחות טלפון ומיילים חוזרים</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">איכות תיעוד</div>
+            <div class="services-comparison-row-value">מסמכים מפוזרים במערכות שונות</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">עומק אסטרטגיית מס</div>
+            <div class="services-comparison-row-value">ייעוץ כללי ללא התאמה אישית</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">עמדת ייצוג</div>
+            <div class="services-comparison-row-value">תמיכה חלקית מול רשויות</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">מוכנות לביצוע</div>
+            <div class="services-comparison-row-value">תהליך ארוך עם עיכובים</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Generic retirement advice -->
+      <div class="services-comparison-card">
+        <div class="services-comparison-card-header">
+          <h3>ייעוץ פרישה גנרי</h3>
+        </div>
+        <div class="services-comparison-rows">
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">בהירות תקשורת</div>
+            <div class="services-comparison-row-value">מפגשים לא מובנים</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">איכות תיעוד</div>
+            <div class="services-comparison-row-value">תיקים ידניים ללא סטנדרט</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">עומק אסטרטגיית מס</div>
+            <div class="services-comparison-row-value">המלצות כלליות בלבד</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">עמדת ייצוג</div>
+            <div class="services-comparison-row-value">ללא ייצוג מלא מול המס</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">מוכנות לביצוע</div>
+            <div class="services-comparison-row-value">תלוי בזמינות היועץ</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Pashut Lifrosh workflow (highlighted) -->
+      <div class="services-comparison-card services-comparison-card-highlight">
+        <div class="services-comparison-card-accent"></div>
+        <div class="services-comparison-card-header">
+          <h3>תהליך העבודה של פשוט לפרוש</h3>
+        </div>
+        <div class="services-comparison-rows">
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">בהירות תקשורת</div>
+            <div class="services-comparison-row-value services-comparison-highlight-text">צ'ק-ליסט מובנה עם שאלות ממוקדות</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">איכות תיעוד</div>
+            <div class="services-comparison-row-value services-comparison-highlight-text">תיק דיגיטלי מסודר עם חתימות דיגיטליות</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">עומק אסטרטגיית מס</div>
+            <div class="services-comparison-row-value services-comparison-highlight-text">אופטימיזציה מלאה לפי מסלול אישי</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">עמדת ייצוג</div>
+            <div class="services-comparison-row-value services-comparison-highlight-text">הגשות מוכנות לייצוג מול רשויות המס</div>
+          </div>
+          <div class="services-comparison-row">
+            <div class="services-comparison-row-label">מוכנות לביצוע</div>
+            <div class="services-comparison-row-value services-comparison-highlight-text">תהליך מהיר ויעיל עם אינטגרציית CRM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom divider: angled notch cut-out at END side (left in RTL) -->
+  <div class="services-comparison-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 80" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 L0,0 L1150,0 L1200,40 L1200,80 Z" fill="#F6F1EC"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="services-faq-section" data-layout-spec="שירותים-faq">
+  <div class="services-faq-container">
+    <h2 class="services-faq-title">שאלות נפוצות, תשובות ברורות</h2>
+    <div class="services-faq-grid">
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">מתי כדאי להתחיל לתכנן פרישה?</h3>
+        <p class="services-faq-answer">מומלץ להתחיל תהליך תכנון פרישה לפחות 6-12 חודשים לפני המועד המתוכנן. זה מאפשר לנו לבחון את כל הזכויות, לאתר הטבות מס שעלולות להיפספס, ולוודא שכל המסמכים מוכנים בזמן.</p>
+      </div>
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">אילו מסמכים בדרך כלל נדרשים?</h3>
+        <p class="services-faq-answer">תלושי שכר אחרונים, דוחות מס שנתיים, אישורי קופות גמל, פרטי חשבון בנק ומסמכי זהות. במקרים מיוחדים (כמו פרישה רפואית) נדרשים אישורים רפואיים. אנחנו נדריך אותך בדיוק מה נחוץ לפי המצב שלך.</p>
+      </div>
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">איך עובד הייצוג מול רשויות המס?</h3>
+        <p class="services-faq-answer">אנחנו מייצגים אותך באופן מלא מול רשות המיסים והביטוח הלאומי. זה כולל הגשת כל הטפסים, מענה על פניות, ומעקב עד לאישור סופי. אתה לא צריך להתמודד עם הבירוקרטיה לבד.</p>
+      </div>
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">איך מטפלים ברגישות במקרים רפואיים?</h3>
+        <p class="services-faq-answer">פרישה רפואית מטופלת בדיסקרטיות מלאה. אנחנו מבינים את הרגישות המיוחדת, ומלווים בסבלנות ובאמפתיה. כל המסמכים הרפואיים נשמרים בסודיות מוחלטת, והתקשורת מותאמת לקצב שלך.</p>
+      </div>
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">מה קורה אם יש לי מספר מעסיקים וקופות?</h3>
+        <p class="services-faq-answer">זה בדיוק התחום שלנו. אנחנו מאתרים את כל הזכויות מכל המקורות, מרכזים את הכספים בצורה חכמה, ומוודאים שלא נשארות זכויות "שכוחות". קיבוע זכויות הוא אחד השירותים המרכזיים שלנו.</p>
+      </div>
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">מה לצפות אחרי הגשת הבקשה?</h3>
+        <p class="services-faq-answer">לאחר ההגשה, אנחנו ממשיכים לעקוב אחר הטיפול ברשויות. תקבל עדכונים שוטפים, ואם נדרשים מסמכים נוספים – נדאג לכך. בממוצע, התהליך לוקח 4-8 שבועות, ואנחנו כאן לכל שאלה בדרך.</p>
+      </div>
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">האם יש עלות ייעוץ ראשוני?</h3>
+        <p class="services-faq-answer">הפגישה הראשונה היא ללא עלות. נבחן את המצב שלך, נסביר את השירות ואת התמחור, ורק אם תחליט להמשיך – נתחיל בתהליך. אין התחייבות מראש.</p>
+      </div>
+      <div class="services-faq-card">
+        <h3 class="services-faq-question">מה אם אני עדיין עובד מעל גיל הפרישה?</h3>
+        <p class="services-faq-answer">זה מצב נפוץ ויש לו השלכות מס חשובות. נבדוק את הזכאות שלך להטבות, נוודא שהזכויות נשמרות, ונמליץ על המועד האופטימלי לפרישה כדי למקסם את התשואה הכלכלית.</p>
+      </div>
+    </div>
+  </div>
+  <div class="services-faq-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewbox="0 0 1200 80" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="services-faq-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#F6F1EC;stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#071427;stop-opacity:1"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,80 L0,40 Q100,35 200,40 T400,38 Q500,42 600,38 T800,40 Q900,38 1000,40 T1200,38 L1200,80 Z" fill="#071427"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="services-cta-section" data-layout-spec="שירותים-cta">
+  <div class="services-cta-container">
+    <div class="services-cta-card">
+      <h2>לא בטוחים איזה מסלול מתאים לכם?</h2>
+      <p>שלחו לנו את הפרטים הבסיסיים ואנחנו נכוון אתכם למסלול הנכון—בשקט, בדיסקרטיות, ועם צעדים ברורים להמשך.</p>
+      <a href="/contact" class="services-cta-btn">צרו קשר</a>
+      <div class="services-cta-reassurance">
+        <div class="reassurance-item">
+          <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2L12.5 7.5L18 8.5L14 12.5L15 18L10 15.5L5 18L6 12.5L2 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+          </svg>
+          <span>הכוונה ברורה</span>
+        </div>
+        <div class="reassurance-item">
+          <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6H16M4 10H16M4 14H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"></rect>
+          </svg>
+          <span>תיעוד מסודר</span>
+        </div>
+        <div class="reassurance-item">
+          <svg data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+            <path d="M7 10L9 12L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span>גישה מוכנה לייצוג</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-column footer-about">
+        <img src="/assets/logo.webp" alt="פשוט לפרוש" class="logo">
+        <p class="footer-description">שירותים פיננסיים ומיסוי מקצועיים להבטחת עתידך הפנסיוני</p>
+      </div>
+      
+      <div class="footer-column footer-links">
+        <h3 class="footer-heading">קישורים מהירים</h3>
+        <ul class="footer-menu">
+          <li><a href="/services">שירותים</a></li>
+          <li><a href="/process">תהליך</a></li>
+          <li><a href="/contact">צור קשר</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column footer-contact">
+        <h3 class="footer-heading">יצירת קשר</h3>
+        <ul class="contact-list">
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:[business_email]">[business_email]</a>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:[business_phone]">[business_phone]</a>
+          </li>
+          <li><a href="/"><i class="fas fa-map-marker-alt"></i>
+            <span>[business_address]</span></a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column footer-social">
+        <h3 class="footer-heading">עקבו אחרינו</h3>
+        <div class="social-links">
+          <a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <div class="copyright">
+          <p>© 2026 פשוט לפרוש. כל הזכויות שמורות.</p>
+        </div>
+        <div class="footer-legal">
+          <a href="/privacy">מדיניות פרטיות</a>
+          <span class="separator">|</span>
+          <a href="/terms">תנאי שימוש</a>
+          <span class="separator">|</span>
+          <a href="/accessibility">נגישות</a>
+          <span class="separator">|</span>
+          <a href="https://zappy5.com" target="_blank" class="zappy-attribution">נוצר באמצעות Zappy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body>
+</html>
