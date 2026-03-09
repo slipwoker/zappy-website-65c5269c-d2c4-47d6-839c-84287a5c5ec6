@@ -254,7 +254,7 @@
       .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
       /* Submenu item styling */
       .sub-menu li { list-style: none; margin: 0; padding: 0; }
-      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
       .sub-menu a:hover { background-color: #f5f5f5; }
       /* RTL (Hebrew/Arabic) dropdown positioning */
       [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
@@ -300,16 +300,16 @@
 
   <nav class="navbar" dir="rtl">
   <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
-    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <svg class="hamburger-icon" width="24" height="24" viewbox="0 0 24 24" fill="none">
       <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
     </svg>
-    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+    <svg class="close-icon" width="24" height="24" viewbox="0 0 24 24" fill="none" style="display:none;">
       <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
     </svg>
   </button>
   
   <button class="phone-header-btn" aria-label="Call">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
     </svg>
   </button>
@@ -352,7 +352,7 @@
       
       <div class="index-hero-section__trust-bullets">
         <div class="index-hero-section__trust-item">
-          <svg class="index-hero-section__trust-icon" data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="index-hero-section__trust-icon" data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.3"></circle>
             <path d="M10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
             <path d="M7 10L9 12L13 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -365,7 +365,7 @@
         </div>
         
         <div class="index-hero-section__trust-item">
-          <svg class="index-hero-section__trust-icon" data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="index-hero-section__trust-icon" data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.3"></circle>
             <path d="M10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
             <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -374,7 +374,7 @@
         </div>
         
         <div class="index-hero-section__trust-item">
-          <svg class="index-hero-section__trust-icon" data-element-type="icon" data-icon-type="svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="index-hero-section__trust-icon" data-element-type="icon" data-icon-type="svg" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.3"></circle>
             <rect x="4" y="5" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5"></rect>
             <path d="M8 5V3C8 2.44772 8.44772 2 9 2H11C11.5523 2 12 2.44772 12 3V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
@@ -391,11 +391,140 @@
   </div>
   
   <div class="index-hero-section-divider-wrapper">
-    <svg aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,80 L0,45 Q150,38 300,42 T600,40 Q750,44 900,38 T1200,42 L1200,80 Z" fill="#F6F1EC"></path>
+    <svg aria-hidden="true" viewbox="0 0 1200 80" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 L0,45 Q150,38 300,42 T600,40 Q750,44 900,38 T1200,42 L1200,80 Z" fill="var(--bg-light)"></path>
     </svg>
   </div>
 </section>
+
+<section class="customer-journey-section" dir="rtl" data-zappy-component="true" id="ai-section-1773052514464-mbm5ie4">
+  <div class="journey-container">
+    <div class="journey-header">
+      <h2 class="journey-title">המסע שלך לפרישה חכמה</h2>
+      <p class="journey-subtitle">5 שלבים ברורים, תהליך שקוף ומקצועי שמוביל אותך מהאישור הראשון ועד לקצבה בחשבון</p>
+    </div>
+
+    <div class="timeline-wrapper">
+      <div class="timeline-line"></div>
+      
+      <div class="timeline-steps">
+        <!-- Step 1 -->
+        <div class="timeline-step" data-step="1">
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28 16L16 4L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M8 14V26C8 26.5304 8.21071 27.0391 8.58579 27.4142C8.96086 27.7893 9.46957 28 10 28H22C22.5304 28 23.0391 27.7893 23.4142 27.4142C23.7893 27.0391 24 26.5304 24 26V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12 28V18H20V28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <div class="step-number">1</div>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">קליטה דיגיטלית חכמה</h3>
+            <p class="step-description">העלאה פשוטה של "מסמכי הזהב" (טופס 161, 106, ת"ז) לאזור אישי מאובטח. התהליך לוקח 5 דקות והמערכת מאמתת את המסמכים באופן אוטומטי.</p>
+            <div class="step-status">
+              <span class="status-badge">אצלך</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="timeline-step" data-step="2">
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 16L12 24L28 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+              </svg>
+            </div>
+            <div class="step-number">2</div>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">ניתוח אסטרטגי</h3>
+            <p class="step-description">בניית מודל אופטימלי למיקסום הנטו בפרישה וקיבוע זכויות מותאם אישית. צוות המומחים שלנו בוחן כל תרחיש אפשרי למציאת המסלול המיטבי עבורך.</p>
+            <div class="step-status">
+              <span class="status-badge status-us">אצלנו</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="timeline-step" data-step="3">
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 4V28M16 4L8 12M16 4L24 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M4 20H28" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="step-number">3</div>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">ייצוג ומיסוי</h3>
+            <p class="step-description">ניהול מלא של הדיאלוג המקצועי מול פקיד השומה – אנחנו שם במקומך. כל התכתבות, כל הגשה, כל מעקב – אתה רק מקבל עדכונים.</p>
+            <div class="step-status">
+              <span class="status-badge status-us">אצלנו</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="timeline-step" data-step="4">
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="6" width="20" height="20" rx="2" stroke="currentColor" stroke-width="2"></rect>
+                <path d="M12 14L15 17L20 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <div class="step-number">4</div>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">הטמעה וביצוע</h3>
+            <p class="step-description">שידור אישורי המס ועדכון הזכויות בכל חברות הביטוח והפנסיה. אנחנו מתאמים עם כל הגופים ומוודאים שהכל מתבצע בדיוק לפי התכנית.</p>
+            <div class="step-status">
+              <span class="status-badge status-us">אצלנו</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="timeline-step" data-step="5">
+          <div class="step-icon-wrapper">
+            <div class="step-icon">
+              <svg width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="currentColor" stroke-width="2"></path>
+                <path d="M16 10V16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="step-number">5</div>
+          </div>
+          <div class="step-content">
+            <h3 class="step-title">ליווי וסגירה</h3>
+            <p class="step-description">וידוא קבלת קצבה ראשונה והפקת "תיק פרישה דיגיטלי" מסוכם. אתה מקבל דוח מלא, מסודר ונגיש לכל החיים – הכל במקום אחד.</p>
+            <div class="step-status">
+              <span class="status-badge status-done">הושלם</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey-footer">
+      <div class="transparency-badge">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span>שקיפות מלאה בכל שלב – תמיד תדע בדיוק אצל מי הכדור</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 <section class="index-services-section" data-layout-spec="בית-services">
   <div class="index-services-container">
@@ -408,7 +537,7 @@
     <!-- Guided Start Preview Module -->
     <div class="index-services-preview-card">
       <div class="index-services-preview-header">
-        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" width="28" height="28" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
           <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
@@ -438,7 +567,7 @@
     <div class="index-services-pathways-grid">
       <!-- Card 1: Standard Retirement -->
       <div class="index-services-pathway-card">
-        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"></rect>
           <path d="M9 9h6M9 12h6M9 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
         </svg>
@@ -455,7 +584,7 @@
 
       <!-- Card 2: Medical Retirement -->
       <div class="index-services-pathway-card">
-        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
           <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"></circle>
         </svg>
@@ -472,7 +601,7 @@
 
       <!-- Card 3: Career Change -->
       <div class="index-services-pathway-card">
-        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         <h3>החלפת קריירה</h3>
@@ -488,7 +617,7 @@
 
       <!-- Card 4: Rights Consolidation -->
       <div class="index-services-pathway-card">
-        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.5"></circle>
           <circle cx="6" cy="16" r="3" stroke="currentColor" stroke-width="1.5"></circle>
           <circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.5"></circle>
@@ -515,7 +644,7 @@
 
   <!-- Bottom Divider -->
   <div class="index-services-divider-wrapper">
-    <svg aria-hidden="true" viewBox="0 0 1200 2" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" viewbox="0 0 1200 2" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
       <line x1="0" y1="1" x2="800" y2="1" stroke="#D8AF6A" stroke-width="1" stroke-dasharray="0"></line>
       <line x1="800" y1="1" x2="1000" y2="1" stroke="#D8AF6A" stroke-width="1" stroke-dasharray="4 4" opacity="0.7"></line>
       <line x1="1000" y1="1" x2="1200" y2="1" stroke="#D8AF6A" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"></line>
@@ -583,7 +712,7 @@
   </div>
   
   <div class="index-steps-divider-wrapper">
-    <svg aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" viewbox="0 0 1200 100" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="index-steps-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" style="stop-color:#F6F1EC;stop-opacity:1"></stop>
@@ -624,20 +753,20 @@
 
     <div class="index-testimonials-values">
       <div class="index-value-item">
-        <svg aria-hidden="true" class="index-value-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" class="index-value-icon" width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M6 10h20M6 16h20M6 22h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
         </svg>
         <span>תקשורת מובנית</span>
       </div>
       <div class="index-value-item">
-        <svg aria-hidden="true" class="index-value-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" class="index-value-icon" width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 4L4 10v8c0 7.5 5 14 12 16 7-2 12-8.5 12-16v-8L16 4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"></path>
           <path d="M12 16l3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         <span>הגשות מודעות סיכון</span>
       </div>
       <div class="index-value-item">
-        <svg aria-hidden="true" class="index-value-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" class="index-value-icon" width="32" height="32" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="2" fill="none"></circle>
           <path d="M16 11v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
         </svg>
@@ -647,7 +776,7 @@
   </div>
 
   <div class="index-testimonials-divider-wrapper">
-    <svg aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <svg aria-hidden="true" viewbox="0 0 1200 80" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,80 L0,20 L1200,60 L1200,80 Z" fill="#F6F1EC"></path>
     </svg>
   </div>
@@ -665,21 +794,21 @@
     </div>
     <div class="index-cta-reassurance">
       <div class="index-cta-reassurance-item">
-        <svg aria-hidden="true" class="index-cta-check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" class="index-cta-check-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
           <path d="M8 12.5L10.5 15L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         <span>צעדים ברורים קדימה</span>
       </div>
       <div class="index-cta-reassurance-item">
-        <svg aria-hidden="true" class="index-cta-check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" class="index-cta-check-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
           <path d="M8 12.5L10.5 15L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         <span>החלטות מתועדות</span>
       </div>
       <div class="index-cta-reassurance-item">
-        <svg aria-hidden="true" class="index-cta-check-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" class="index-cta-check-icon" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
           <path d="M8 12.5L10.5 15L16 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
